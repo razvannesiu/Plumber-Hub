@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Plumber Hub App</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="txt_trs">Trips</string>
+    <string name="txt_tls">Tools</string>
+    <string name="txt_cus">Customers</string>
+    <string name="txt_est">Estimates</string>
+    <string name="txt_save">Save</string>
+
+    <string name="tls_hint">Enter new tool name</string>
+</resources>
