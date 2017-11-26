@@ -3,6 +3,7 @@ package android.plumberhub.com.plumberhubapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,22 +64,15 @@ public class Tools extends AppCompatActivity {
             }
         });
 
-//        SwipeDismissListViewTouchListener touchListener =
-//                new SwipeDismissListViewTouchListener(
-//                        lvTools,
-//                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
-//                            @Override
-//                            public boolean canDismiss(int position) {
-//                                return true;
-//                            }
-//
-//                            @Override
-//                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-//                                for (int position : reverseSortedPositions) {
-//                                    firebaseListAdapter.notifyDataSetChanged();
-//                                }
-//                            }
-//                        });
-//        lvTools.setOnTouchListener(touchListener);
+
+        lvTools.setLongClickable(true);
+        lvTools.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                firebaseListAdapter.getRef(pos).removeValue();
+                return true;
+            }
+        });
     }
 }
