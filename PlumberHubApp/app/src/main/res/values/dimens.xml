@@ -6,4 +6,6 @@
     <dimen name="btn_menu_pad_top">20dp</dimen>
     <dimen name="txt_menu_pad_top">20dp</dimen>
     <dimen name="txt_widget_cus">12dp</dimen>
+    <dimen name="service_margin">8dp</dimen>
+    <dimen name="service_title">18dp</dimen>
 </resources>

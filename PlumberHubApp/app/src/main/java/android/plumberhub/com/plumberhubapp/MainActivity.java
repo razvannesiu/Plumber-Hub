@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
             case "Customers":
                 intent = new Intent(MainActivity.this, Customers.class);
                 break;
-            case "Estimates":
-//                intent = new Intent(MainActivity.this, MultiPlayerQuiz.class);
+            case "Services":
+                intent = new Intent(MainActivity.this, Services.class);
                 break;
             case "Tools":
                 intent = new Intent(MainActivity.this, Tools.class);

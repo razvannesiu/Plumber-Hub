@@ -4,7 +4,7 @@
     <string name="txt_trs">Trips</string>
     <string name="txt_tls">Tools</string>
     <string name="txt_cus">Customers</string>
-    <string name="txt_est">Estimates</string>
+    <string name="txt_est">Services</string>
     <string name="txt_save">Save</string>
 
     <string name="tls_hint">Enter new tool name</string>
@@ -12,4 +12,9 @@
     <string name="cus_hint_email">Enter new email</string>
     <string name="cus_hint_phone">Enter new phone</string>
     <string name="cus_hint_address">Enter new address</string>
+
+    <string name="service_title">Title</string>
+    <string name="service_price">$%.2f</string>
+    <string name="service_tools">Tools: Rake, Hammer, Nails</string>
+    <string name="service_description">Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
 </resources>
