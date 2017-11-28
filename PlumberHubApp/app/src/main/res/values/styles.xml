@@ -17,10 +17,14 @@
     </style>
 
     <style name="txt_title_style">
-        <item name="android:text">@string/txt_tls</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/txt_title</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="txt_widget_cus_style">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/txt_widget_cus</item>
     </style>
 
 </resources>

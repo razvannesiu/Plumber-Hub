@@ -12,10 +12,6 @@ public class Customer {
     private String email;
 
     public Customer(){
-        name = "";
-        address = "";
-        phone = "";
-        email = "";
     }
 
     public Customer(String name, String address, String phone, String email){
@@ -55,5 +51,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + '\n' +
+                "Address: " + address + '\n' +
+                "Phone: " + phone + '\n' +
+                "Email: " + email;
     }
 }

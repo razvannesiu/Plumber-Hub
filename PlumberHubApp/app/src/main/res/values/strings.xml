@@ -8,4 +8,8 @@
     <string name="txt_save">Save</string>
 
     <string name="tls_hint">Enter new tool name</string>
+    <string name="cus_hint_name">Enter new name</string>
+    <string name="cus_hint_email">Enter new email</string>
+    <string name="cus_hint_phone">Enter new phone</string>
+    <string name="cus_hint_address">Enter new address</string>
 </resources>

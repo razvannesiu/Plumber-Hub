@@ -5,4 +5,5 @@
     <dimen name="txt_title">25dp</dimen>
     <dimen name="btn_menu_pad_top">20dp</dimen>
     <dimen name="txt_menu_pad_top">20dp</dimen>
+    <dimen name="txt_widget_cus">12dp</dimen>
 </resources>
