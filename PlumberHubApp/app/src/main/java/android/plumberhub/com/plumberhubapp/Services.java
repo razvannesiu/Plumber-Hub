@@ -69,7 +69,7 @@ public class Services extends AppCompatActivity {
         String title = edtNewTitle.getText().toString();
         String description = edtNewDescription.getText().toString();
         List<String> tools = new ArrayList<String>();
-        for (String s : edtNewTools.getText().toString().replaceAll("\\s+", "").split(",")) {
+        for (String s : edtNewTools.getText().toString().split(",")) {
             tools.add(s);
         }
         double price = Double.parseDouble(edtNewPrice.getText().toString());

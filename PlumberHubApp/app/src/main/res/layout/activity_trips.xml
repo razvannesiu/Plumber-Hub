@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="android.plumberhub.com.plumberhubapp.Services"
+    tools:context="android.plumberhub.com.plumberhubapp.Trips"
     android:layout_marginBottom="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
@@ -15,43 +15,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="@string/txt_srv"
+        android:text="@string/txt_trs"
         style="@style/txt_title_style"/>
 
     <EditText
-        android:id="@+id/edtNewTitle"
+        android:id="@+id/edtNewCustName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/trs_hint_name"
+        />
+
+    <EditText
+        android:id="@+id/edtNewServices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="@string/srv_hint_title"
+        android:hint="@string/trs_hint_services"
         />
 
     <EditText
-        android:id="@+id/edtNewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/srv_hint_description"
-        />
-
-    <EditText
-        android:id="@+id/edtNewTools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/srv_hint_tools"
-        />
-
-    <EditText
-        android:id="@+id/edtNewPrice"
+        android:id="@+id/edtNewTotalCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="@string/srv_hint_price"
+        android:hint="@string/trs_hint_total_cost"
         />
 
     <LinearLayout
@@ -60,30 +51,31 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnClearService"
+            android:id="@+id/btnClearTrip"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/txt_clear" />
 
         <Button
-            android:id="@+id/btnUploadImage"
+            android:id="@+id/btnPickDateTime"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/txt_upload" />
+            android:text="@string/txt_pick_date_time" />
 
         <Button
-            android:id="@+id/btnSaveService"
+            android:id="@+id/btnSaveTrip"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/txt_save" />
+
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_list_img"
+    <ListView
+        android:id="@+id/lvTrips"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

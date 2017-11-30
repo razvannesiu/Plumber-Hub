@@ -8,6 +8,7 @@
     <string name="txt_save">Save</string>
     <string name="txt_upload">Upload Image</string>
     <string name="txt_clear">Clear</string>
+    <string name="txt_pick_date_time">Schedule Date</string>
 
     <string name="tls_hint">Enter new tool name</string>
     <string name="cus_hint_name">Enter new name</string>
@@ -18,9 +19,18 @@
     <string name="srv_hint_description">Enter new description</string>
     <string name="srv_hint_tools">Enter new comma-separated tools</string>
     <string name="srv_hint_price">Enter new price</string>
+    <string name="trs_hint_name">Enter new customer name</string>
+    <string name="trs_hint_services">Enter new comma-separated services</string>
+    <string name="trs_hint_total_cost">Enter new total cost</string>
 
     <string name="service_title">Title</string>
     <string name="service_price">$%.2f</string>
     <string name="service_tools">Tools: Rake, Hammer, Nails</string>
     <string name="service_description">Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+
+    <string name="trip_cust_name">Razvan Nesiu</string>
+    <string name="trip_price">$25</string>
+    <string name="trip_services">Services: Bathtub Reparation, Leaf Raking</string>
+    <string name="trip_date">25, December 2017, 15:30</string>
+
 </resources>

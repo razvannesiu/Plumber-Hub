@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, Tools.class);
                 break;
             case "Trips":
-//                intent = new Intent(MainActivity.this, Settings.class);
+                intent = new Intent(MainActivity.this, Trips.class);
                 break;
         }
 

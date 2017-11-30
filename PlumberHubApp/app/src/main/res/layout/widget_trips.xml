@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:layout_margin="@dimen/trip_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtCustName"
+        android:text="@string/trip_cust_name"
+        android:textStyle="bold"
+        style="@style/txt_widget_trs_style"/>
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:text="@string/trip_date"
+        android:textColor="@color/colorPrimaryDark"
+        style="@style/txt_widget_trs_style"/>
+
+    <TextView
+        android:id="@+id/txtServices"
+        android:text="@string/trip_services"
+        style="@style/txt_widget_trs_style"/>
+
+    <TextView
+        android:id="@+id/txtTotalCost"
+        android:text="@string/trip_price"
+        android:textStyle="bold"
+        style="@style/txt_widget_trs_style"/>
+</LinearLayout>
