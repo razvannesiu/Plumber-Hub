@@ -4,14 +4,20 @@
     <string name="txt_trs">Trips</string>
     <string name="txt_tls">Tools</string>
     <string name="txt_cus">Customers</string>
-    <string name="txt_est">Services</string>
+    <string name="txt_srv">Services</string>
     <string name="txt_save">Save</string>
+    <string name="txt_upload">Upload Image</string>
+    <string name="txt_clear">Clear</string>
 
     <string name="tls_hint">Enter new tool name</string>
     <string name="cus_hint_name">Enter new name</string>
     <string name="cus_hint_email">Enter new email</string>
     <string name="cus_hint_phone">Enter new phone</string>
     <string name="cus_hint_address">Enter new address</string>
+    <string name="srv_hint_title">Enter new title</string>
+    <string name="srv_hint_description">Enter new description</string>
+    <string name="srv_hint_tools">Enter new comma-separated tools</string>
+    <string name="srv_hint_price">Enter new price</string>
 
     <string name="service_title">Title</string>
     <string name="service_price">$%.2f</string>

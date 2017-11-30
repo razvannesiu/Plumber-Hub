@@ -1,5 +1,7 @@
 package android.plumberhub.com.plumberhubapp;
 
+import java.util.List;
+
 /**
  * Created by razva on 2017-11-28.
  */
@@ -9,14 +11,14 @@ public class Service {
     private String title;
     private String imageUrl;
     private String description;
-    private String[] tools;
+    private List<String> tools;
     private double price;
 
     public Service(){
 
     }
 
-    public Service(String title, String imageUrl, String description, String[] tools, double price) {
+    public Service(String title, String imageUrl, String description, List<String> tools, double price) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
@@ -48,11 +50,11 @@ public class Service {
         this.description = description;
     }
 
-    public String[] getTools() {
+    public List<String> getTools() {
         return tools;
     }
 
-    public void setTools(String[] tools) {
+    public void setTools(List<String> tools) {
         this.tools = tools;
     }
 

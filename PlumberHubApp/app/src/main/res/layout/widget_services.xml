@@ -12,36 +12,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/service_title"
-        android:textAlignment="center"
+        android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="@dimen/service_title"/>
 
     <ImageView
         android:id="@+id/imgService"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/btn_star" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/service_description"
-        android:textAlignment="center"/>
+        android:gravity="center_horizontal"/>
 
     <TextView
         android:id="@+id/txtServiceTools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/service_tools"
-        android:textAlignment="center"/>
+        android:gravity="center_horizontal"/>
 
     <TextView
         android:id="@+id/txtPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/service_price"
-        android:textAlignment="center"
+        android:gravity="center_horizontal"
         android:textStyle="bold"/>
 
 </LinearLayout>
