@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Customers extends AppCompatActivity {
 
     private Button btnSave;
+    private Button btnClear;
     DatabaseReference mCusDatabase;
     private EditText edtNewName;
     private EditText edtNewPhone;
@@ -43,10 +44,21 @@ public class Customers extends AppCompatActivity {
 
         lvCustomers = (ListView) findViewById(R.id.lvCust);
         btnSave = (Button) findViewById(R.id.btnSaveCustomer);
+        btnClear = (Button) findViewById(R.id.btnClearCustomer);
         edtNewName = (EditText) findViewById(R.id.edtNewName);
         edtNewPhone = (EditText) findViewById(R.id.edtNewPhone);
         edtNewAddress = (EditText) findViewById(R.id.edtNewAddress);
         edtNewEmail = (EditText) findViewById(R.id.edtNewEmail);
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtNewName.setText("");
+                edtNewAddress.setText("");
+                edtNewEmail.setText("");
+                edtNewPhone.setText("");
+            }
+        });
 
         final FirebaseListAdapter<Customer> firebaseCustListAdapter = new FirebaseListAdapter<Customer>(
                 this,
@@ -65,7 +77,7 @@ public class Customers extends AppCompatActivity {
                 txtAddress.setText(model.getAddress());
                 txtPhone.setText(model.getPhone());
                 txtEmail.setText(model.getEmail());
-                v.setBackgroundColor(position % 2 == 0? Color.LTGRAY : Color.WHITE);
+                v.setBackgroundColor(position % 2 != 0? Color.LTGRAY : Color.WHITE);
             }
         };
 

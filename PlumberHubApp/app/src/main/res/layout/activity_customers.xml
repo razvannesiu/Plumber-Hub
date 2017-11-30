@@ -54,11 +54,27 @@
         android:hint="@string/cus_hint_email"
         />
 
-    <Button
-        android:id="@+id/btnSaveCustomer"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txt_save" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClearCustomer"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/txt_clear" />
+
+        <Button
+            android:id="@+id/btnSaveCustomer"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/txt_save" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvCust"
