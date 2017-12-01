@@ -3,21 +3,17 @@ package android.plumberhub.com.plumberhubapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -33,9 +29,7 @@ import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,7 +38,8 @@ public class Services extends AppCompatActivity {
 
     Animation animRotate;
     Animation animScale;
-    Animation animTranslate;
+    Animation animTranslateRight;
+    Animation animTranslateLeft;
     StorageReference imageReference;
     StorageReference fileRef;
     ProgressDialog progressDialog;
@@ -64,6 +59,7 @@ public class Services extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     Uri fileUri;
     private static final int CHOOSING_IMAGE_REQUEST = 1234;
+    private static boolean SLIDE_TO_RIGHT = false;
 
     private void chooseFile(View v) {
         Intent intent = new Intent();
@@ -144,7 +140,8 @@ public class Services extends AppCompatActivity {
 
         animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
-        animTranslate = AnimationUtils.loadAnimation(this, R.anim.translate);
+        animTranslateRight = AnimationUtils.loadAnimation(this, R.anim.translate_right);
+        animTranslateLeft = AnimationUtils.loadAnimation(this, R.anim.translate_left);
 
         firebaseAuth = FirebaseAuth.getInstance();
         edtNewTitle = (EditText) findViewById(R.id.edtNewTitle);
@@ -229,7 +226,13 @@ public class Services extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
-                view.startAnimation(animTranslate);
+                if(SLIDE_TO_RIGHT){
+                    view.startAnimation(animTranslateRight);
+                }
+                else{
+                    view.startAnimation(animTranslateLeft);
+                }
+                SLIDE_TO_RIGHT = ! SLIDE_TO_RIGHT;
                 mAdapter.getRef(position).removeValue();
             }
         }));
