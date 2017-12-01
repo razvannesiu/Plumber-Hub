@@ -66,5 +66,29 @@
             android:text="@string/txt_tls"
             android:tag="@string/txt_tls"
             style="@style/btn_menu_style"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/txt_login"
+            android:tag="@string/txt_login"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            style="@style/btn_menu_style"/>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/txt_logout"
+            android:tag="@string/txt_logout"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            style="@style/btn_menu_style"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/customer_name"
         style="@style/txt_widget_cus_style"/>
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/customer_address"
         style="@style/txt_widget_cus_style"/>
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/customer_phone"
         style="@style/txt_widget_cus_style"/>
 
     <TextView
@@ -34,6 +34,6 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/customer_email"
         style="@style/txt_widget_cus_style"/>
 </LinearLayout>

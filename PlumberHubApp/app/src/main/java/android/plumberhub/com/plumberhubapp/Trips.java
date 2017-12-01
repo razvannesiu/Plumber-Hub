@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,6 +37,7 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
     private EditText edtNewServices;
     private EditText edtNewTotalCost;
     private Calendar cal = Calendar.getInstance();
+    private FirebaseAuth firebaseAuth;
     private ListView lvTrips;
     private int day = 0, month = 0, year = 2017, hour = 0, minute = 0,
             dayFinal = 0, monthFinal = 0, yearFinal = 2017, hourFinal = 0, minuteFinal = 0;
@@ -57,6 +60,7 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trips);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         mTrsDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/trips");
 
         lvTrips = (ListView) findViewById(R.id.lvTrips);
@@ -115,7 +119,13 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushNewTrip();
+                if(firebaseAuth.getCurrentUser() != null) {
+                    pushNewTrip();
+                }
+                else{
+                    Toast.makeText(Trips.this, "Authentication required!", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 

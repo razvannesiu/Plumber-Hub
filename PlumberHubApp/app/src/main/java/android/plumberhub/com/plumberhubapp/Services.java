@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -55,6 +56,7 @@ public class Services extends AppCompatActivity {
     private static final int MAX_RANDOM_ID = 10000;
     private static int ID = 1;
     private RecyclerView rcvListImg;
+    private FirebaseAuth firebaseAuth;
     Uri fileUri;
     private static final int CHOOSING_IMAGE_REQUEST = 1234;
 
@@ -135,6 +137,7 @@ public class Services extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         edtNewTitle = (EditText) findViewById(R.id.edtNewTitle);
         edtNewDescription = (EditText) findViewById(R.id.edtNewDescription);
         edtNewTools = (EditText) findViewById(R.id.edtNewTools);
@@ -156,14 +159,24 @@ public class Services extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveNewService(v);
+                if(firebaseAuth.getCurrentUser() != null) {
+                    saveNewService(v);
+                }
+                else{
+                    Toast.makeText(Services.this, "Authentication required!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseFile(v);
+                if(firebaseAuth.getCurrentUser() != null) {
+                    chooseFile(v);
+                }
+                else{
+                    Toast.makeText(Services.this, "Authentication required!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

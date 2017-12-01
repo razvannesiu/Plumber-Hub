@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Plumber Hub App</string>
+    <string name="app_name">Plumber Hub</string>
     <string name="main_menu">Main Menu</string>
     <string name="txt_trs">Trips</string>
     <string name="txt_tls">Tools</string>
@@ -9,6 +9,8 @@
     <string name="txt_upload">Upload Image</string>
     <string name="txt_clear">Clear</string>
     <string name="txt_pick_date_time">Schedule Date</string>
+    <string name="txt_logout">Log Out</string>
+    <string name="txt_login">Log In</string>
 
     <string name="tls_hint">Enter new tool name</string>
     <string name="cus_hint_name">Enter new name</string>
@@ -32,5 +34,10 @@
     <string name="trip_price">$25</string>
     <string name="trip_services">Services: Bathtub Reparation, Leaf Raking</string>
     <string name="trip_date">25, December 2017, 15:30</string>
+
+    <string name="customer_name">Razvan Nesiu</string>
+    <string name="customer_address">6821 Main Street, Vancouver</string>
+    <string name="customer_email">nesiurazvan@yahoo.com</string>
+    <string name="customer_phone">6048091984</string>
 
 </resources>

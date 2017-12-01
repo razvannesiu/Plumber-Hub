@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +28,7 @@ public class Tools extends AppCompatActivity {
     private Button btnSave;
     private EditText edtNewTool;
     private ListView lvTools;
+    private FirebaseAuth firebaseAuth;
 
     private void pushNewTool(){
         mDatabase.push().setValue(edtNewTool.getText().toString());
@@ -36,6 +39,7 @@ public class Tools extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tools);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/tools");
 
         btnSave = (Button) findViewById(R.id.btnSaveTool);
@@ -60,10 +64,14 @@ public class Tools extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushNewTool();
+                if(firebaseAuth.getCurrentUser() != null) {
+                    pushNewTool();
+                }
+                else{
+                    Toast.makeText(Tools.this, "Authentication required!", Toast.LENGTH_LONG).show();
+                }
             }
         });
-
 
         lvTools.setLongClickable(true);
         lvTools.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

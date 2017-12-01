@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,6 +26,7 @@ public class Customers extends AppCompatActivity {
     private EditText edtNewAddress;
     private EditText edtNewEmail;
     private ListView lvCustomers;
+    private FirebaseAuth firebaseAuth;
 
     private void pushNewCustomer(){
         String name = edtNewName.getText().toString();
@@ -40,6 +43,7 @@ public class Customers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         mCusDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/customers");
 
         lvCustomers = (ListView) findViewById(R.id.lvCust);
@@ -86,7 +90,12 @@ public class Customers extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushNewCustomer();
+                if(firebaseAuth.getCurrentUser() != null) {
+                    pushNewCustomer();
+                }
+                else{
+                    Toast.makeText(Customers.this, "Authentication required!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
