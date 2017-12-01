@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,8 @@ public class Customers extends AppCompatActivity {
     private EditText edtNewEmail;
     private ListView lvCustomers;
     private FirebaseAuth firebaseAuth;
+    private Animation animRotate;
+    private Animation animScale;
 
     private void pushNewCustomer(){
         String name = edtNewName.getText().toString();
@@ -43,6 +47,9 @@ public class Customers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
+        animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+
         firebaseAuth = FirebaseAuth.getInstance();
         mCusDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/customers");
 
@@ -57,6 +64,7 @@ public class Customers extends AppCompatActivity {
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animRotate);
                 edtNewName.setText("");
                 edtNewAddress.setText("");
                 edtNewEmail.setText("");
@@ -90,6 +98,7 @@ public class Customers extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 if(firebaseAuth.getCurrentUser() != null) {
                     pushNewCustomer();
                 }

@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 0;
     private FirebaseAuth firebaseAuth;
+    private Animation animAlpha;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+
         //apply new font for title
         Typeface oleoScript = Typeface.createFromAsset(getAssets(), "Fonts/OleoScript-Bold.ttf");
         TextView tvTitle = (TextView) findViewById(R.id.main_menu);
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view View for this handler.
      */
     public void startMenuBtnHandler(View view) {
+        view.startAnimation(animAlpha);
         Intent intent = null;
 
         String tag = view.getTag().toString();

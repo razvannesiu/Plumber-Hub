@@ -3,6 +3,8 @@ package android.plumberhub.com.plumberhubapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 
 public class Tools extends AppCompatActivity {
 
+    Animation animScale;
     DatabaseReference mDatabase;
     private Button btnSave;
     private EditText edtNewTool;
@@ -38,6 +41,8 @@ public class Tools extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tools);
+
+        animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/tools");
@@ -64,6 +69,7 @@ public class Tools extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 if(firebaseAuth.getCurrentUser() != null) {
                     pushNewTool();
                 }

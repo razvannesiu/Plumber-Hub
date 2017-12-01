@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,6 +35,8 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
     private Button btnClear;
     private Button btnPick;
     DatabaseReference mTrsDatabase;
+    Animation animScale;
+    Animation animRotate;
     private EditText edtNewCustName;
     private EditText edtNewServices;
     private EditText edtNewTotalCost;
@@ -60,6 +64,9 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trips);
 
+        animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+
         firebaseAuth = FirebaseAuth.getInstance();
         mTrsDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/trips");
 
@@ -74,6 +81,7 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         btnPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 Calendar c = Calendar.getInstance();
                 year = c.get(Calendar.YEAR);
                 month = c.get(Calendar.MONTH);
@@ -87,6 +95,7 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animRotate);
                 edtNewCustName.setText("");
                 edtNewTotalCost.setText("");
                 edtNewServices.setText("");
@@ -119,6 +128,7 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 if(firebaseAuth.getCurrentUser() != null) {
                     pushNewTrip();
                 }

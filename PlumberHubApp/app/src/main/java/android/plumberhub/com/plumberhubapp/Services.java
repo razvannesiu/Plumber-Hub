@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +42,9 @@ import java.util.Random;
 
 public class Services extends AppCompatActivity {
 
+    Animation animRotate;
+    Animation animScale;
+    Animation animTranslate;
     StorageReference imageReference;
     StorageReference fileRef;
     ProgressDialog progressDialog;
@@ -137,6 +142,10 @@ public class Services extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
 
+        animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+        animTranslate = AnimationUtils.loadAnimation(this, R.anim.translate);
+
         firebaseAuth = FirebaseAuth.getInstance();
         edtNewTitle = (EditText) findViewById(R.id.edtNewTitle);
         edtNewDescription = (EditText) findViewById(R.id.edtNewDescription);
@@ -149,6 +158,7 @@ public class Services extends AppCompatActivity {
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animRotate);
                 edtNewTitle.setText("");
                 edtNewDescription.setText("");
                 edtNewTools.setText("");
@@ -159,6 +169,7 @@ public class Services extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 if(firebaseAuth.getCurrentUser() != null) {
                     saveNewService(v);
                 }
@@ -171,6 +182,7 @@ public class Services extends AppCompatActivity {
         btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 if(firebaseAuth.getCurrentUser() != null) {
                     chooseFile(v);
                 }
@@ -217,6 +229,7 @@ public class Services extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
+                view.startAnimation(animTranslate);
                 mAdapter.getRef(position).removeValue();
             }
         }));
