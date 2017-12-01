@@ -54,7 +54,6 @@
         android:hint="@string/cus_hint_email"
         />
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,15 +63,15 @@
             android:id="@+id/btnClearCustomer"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/txt_clear" />
+            android:text="@string/txt_clear"
+            style="@style/btn_non_menu_style"/>
 
         <Button
             android:id="@+id/btnSaveCustomer"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/txt_save" />
+            android:text="@string/txt_save"
+            style="@style/btn_non_menu_style"/>
 
     </LinearLayout>
 

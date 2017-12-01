@@ -31,7 +31,8 @@
             android:id="@+id/btnSaveTool"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txt_save" />
+            android:text="@string/txt_save"
+            style="@style/btn_non_menu_style"/>
 
         <ListView
             android:id="@+id/lvTools"

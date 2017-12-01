@@ -63,22 +63,22 @@
             android:id="@+id/btnClearService"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/txt_clear" />
+            android:text="@string/txt_clear"
+            style="@style/btn_non_menu_style"/>
 
         <Button
             android:id="@+id/btnUploadImage"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/txt_upload" />
+            android:text="@string/txt_upload"
+            style="@style/btn_non_menu_style"/>
 
         <Button
             android:id="@+id/btnSaveService"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/txt_save" />
+            android:text="@string/txt_save"
+            style="@style/btn_non_menu_style"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
