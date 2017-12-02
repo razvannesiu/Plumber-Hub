@@ -3,6 +3,7 @@ package android.plumberhub.com.plumberhubapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.plumberhub.com.plumberhubapp.POJOs.Service;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,152 +37,36 @@ import java.util.Random;
 
 public class Services extends AppCompatActivity {
 
-    Animation animRotate;
     Animation animScale;
     Animation animTranslateRight;
     Animation animTranslateLeft;
-    StorageReference imageReference;
-    StorageReference fileRef;
-    ProgressDialog progressDialog;
     DatabaseReference mDataReference;
-    EditText edtNewTitle;
-    EditText edtNewDescription;
-    EditText edtNewTools;
-    EditText edtNewPrice;
-    Button btnUploadImage;
-    Button btnSave;
-    Button btnClear;
+    Button btnAddService;
     private FirebaseRecyclerAdapter<Service, ServiceViewHolder> mAdapter;
     private static final int MAX_CARDS = 25;
-    private static final int MAX_RANDOM_ID = 10000;
-    private static int ID = 1;
     private RecyclerView rcvListImg;
     private FirebaseAuth firebaseAuth;
-    Uri fileUri;
-    private static final int CHOOSING_IMAGE_REQUEST = 1234;
     private static boolean SLIDE_TO_RIGHT = false;
-
-    private void chooseFile(View v) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), CHOOSING_IMAGE_REQUEST);
-    }
-
-    private void writeNewServiceToDB(String url) {
-        String title = edtNewTitle.getText().toString();
-        String description = edtNewDescription.getText().toString();
-        List<String> tools = new ArrayList<String>();
-        for (String s : edtNewTools.getText().toString().split(",")) {
-            tools.add(s);
-        }
-        double price = Double.parseDouble(edtNewPrice.getText().toString());
-        Service service = new Service(title, url, description, tools, price);
-
-        String key = mDataReference.push().getKey();
-        mDataReference.child(key).setValue(service);
-    }
-
-    private void saveNewService(View v){
-        if (fileUri != null) {
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-            fileRef = imageReference.child("service" + (new Random().nextInt(MAX_RANDOM_ID)) + ".jpg");
-
-            fileRef.putFile(fileUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            String url = taskSnapshot.getDownloadUrl().toString();
-
-                            // use Firebase Realtime Database to store the Service
-                            writeNewServiceToDB(url);
-                            progressDialog.dismiss();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // ...
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            // progress percentage
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-
-                            // percentage in progress dialog
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    })
-                    .addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
-                            // ...
-                        }
-                    });
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CHOOSING_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            fileUri = data.getData();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
 
-        animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         animTranslateRight = AnimationUtils.loadAnimation(this, R.anim.translate_right);
         animTranslateLeft = AnimationUtils.loadAnimation(this, R.anim.translate_left);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        edtNewTitle = (EditText) findViewById(R.id.edtNewTitle);
-        edtNewDescription = (EditText) findViewById(R.id.edtNewDescription);
-        edtNewTools = (EditText) findViewById(R.id.edtNewTools);
-        edtNewPrice = (EditText) findViewById(R.id.edtNewPrice);
-        btnUploadImage = (Button) findViewById(R.id.btnUploadImage);
-        btnSave = (Button) findViewById(R.id.btnSaveService);
-        btnClear = (Button) findViewById(R.id.btnClearService);
+        btnAddService = (Button) findViewById(R.id.btnAddService);
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animRotate);
-                edtNewTitle.setText("");
-                edtNewDescription.setText("");
-                edtNewTools.setText("");
-                edtNewPrice.setText("");
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnAddService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animScale);
                 if(firebaseAuth.getCurrentUser() != null) {
-                    saveNewService(v);
-                }
-                else{
-                    Toast.makeText(Services.this, "Authentication required!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        btnUploadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animScale);
-                if(firebaseAuth.getCurrentUser() != null) {
-                    chooseFile(v);
+                    Intent intent = new Intent(Services.this, DialogNewService.class);
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(Services.this, "Authentication required!", Toast.LENGTH_LONG).show();
@@ -190,10 +75,7 @@ public class Services extends AppCompatActivity {
         });
 
         mDataReference = FirebaseDatabase.getInstance().getReference("services");
-        imageReference = FirebaseStorage.getInstance().getReference().child("images");
         Query query = mDataReference.limitToLast(MAX_CARDS);
-        fileRef = null;
-        progressDialog = new ProgressDialog(this);
 
         mAdapter = new FirebaseRecyclerAdapter<Service, ServiceViewHolder>(
                 Service.class, R.layout.widget_services, ServiceViewHolder.class, query) {

@@ -1,6 +1,8 @@
 package android.plumberhub.com.plumberhubapp;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.plumberhub.com.plumberhubapp.POJOs.Customer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,55 +22,34 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Customers extends AppCompatActivity {
 
-    private Button btnSave;
-    private Button btnClear;
+    private Button btnAddCust;
     DatabaseReference mCusDatabase;
-    private EditText edtNewName;
-    private EditText edtNewPhone;
-    private EditText edtNewAddress;
-    private EditText edtNewEmail;
     private ListView lvCustomers;
     private FirebaseAuth firebaseAuth;
-    private Animation animRotate;
     private Animation animScale;
-
-    private void pushNewCustomer(){
-        String name = edtNewName.getText().toString();
-        String address = edtNewAddress.getText().toString();
-        String phone = edtNewPhone.getText().toString();
-        String email = edtNewEmail.getText().toString();
-        Customer customer = new Customer(name, address, phone, email);
-
-        mCusDatabase.push().setValue(customer);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
-        animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
-
-        firebaseAuth = FirebaseAuth.getInstance();
         mCusDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/customers");
-
+        firebaseAuth = FirebaseAuth.getInstance();
         lvCustomers = (ListView) findViewById(R.id.lvCust);
-        btnSave = (Button) findViewById(R.id.btnSaveCustomer);
-        btnClear = (Button) findViewById(R.id.btnClearCustomer);
-        edtNewName = (EditText) findViewById(R.id.edtNewName);
-        edtNewPhone = (EditText) findViewById(R.id.edtNewPhone);
-        edtNewAddress = (EditText) findViewById(R.id.edtNewAddress);
-        edtNewEmail = (EditText) findViewById(R.id.edtNewEmail);
+        btnAddCust = (Button) findViewById(R.id.btnAddCustomer);
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
+        btnAddCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animRotate);
-                edtNewName.setText("");
-                edtNewAddress.setText("");
-                edtNewEmail.setText("");
-                edtNewPhone.setText("");
+                v.startAnimation(animScale);
+                if(firebaseAuth.getCurrentUser() != null) {
+                    Intent intent = new Intent(Customers.this, DialogNewCustomer.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(Customers.this, "Authentication required!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -94,20 +75,6 @@ public class Customers extends AppCompatActivity {
         };
 
         lvCustomers.setAdapter(firebaseCustListAdapter);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animScale);
-                if(firebaseAuth.getCurrentUser() != null) {
-                    pushNewCustomer();
-                }
-                else{
-                    Toast.makeText(Customers.this, "Authentication required!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
         lvCustomers.setLongClickable(true);
         lvCustomers.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

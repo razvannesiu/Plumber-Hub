@@ -1,4 +1,4 @@
-package android.plumberhub.com.plumberhubapp;
+package android.plumberhub.com.plumberhubapp.POJOs;
 
 /**
  * Created by razva on 2017-11-26.

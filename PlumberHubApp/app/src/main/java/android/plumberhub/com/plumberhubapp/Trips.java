@@ -2,6 +2,8 @@ package android.plumberhub.com.plumberhubapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.plumberhub.com.plumberhubapp.POJOs.Trip;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,76 +31,38 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class Trips extends AppCompatActivity {
 
-    private Button btnSave;
-    private Button btnClear;
-    private Button btnPick;
+    private Button btnAddTrip;
     DatabaseReference mTrsDatabase;
     Animation animScale;
-    Animation animRotate;
-    private EditText edtNewCustName;
-    private EditText edtNewServices;
-    private EditText edtNewTotalCost;
-    private Calendar cal = Calendar.getInstance();
     private FirebaseAuth firebaseAuth;
     private ListView lvTrips;
-    private int day = 0, month = 0, year = 2017, hour = 0, minute = 0,
-            dayFinal = 0, monthFinal = 0, yearFinal = 2017, hourFinal = 0, minuteFinal = 0;
-
-    private void pushNewTrip(){
-        String customerName = edtNewCustName.getText().toString();
-        List<String> services = new ArrayList<>();
-        for (String s: edtNewServices.getText().toString().split(",")){
-            services.add(s);
-        }
-        double totalCost = Double.parseDouble(edtNewTotalCost.getText().toString());
-        Date date = cal.getTime();
-        Trip trip = new Trip(customerName, date, services, totalCost);
-
-        mTrsDatabase.push().setValue(trip);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trips);
 
-        animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mTrsDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/trips");
 
         lvTrips = (ListView) findViewById(R.id.lvTrips);
-        btnSave = (Button) findViewById(R.id.btnSaveTrip);
-        btnClear = (Button) findViewById(R.id.btnClearTrip);
-        btnPick = (Button) findViewById(R.id.btnPickDateTime);
-        edtNewCustName = (EditText) findViewById(R.id.edtNewCustName);
-        edtNewTotalCost = (EditText) findViewById(R.id.edtNewTotalCost);
-        edtNewServices = (EditText) findViewById(R.id.edtNewServices);
+        btnAddTrip = (Button) findViewById(R.id.btnAddTrip);
 
-        btnPick.setOnClickListener(new View.OnClickListener() {
+        btnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animScale);
-                Calendar c = Calendar.getInstance();
-                year = c.get(Calendar.YEAR);
-                month = c.get(Calendar.MONTH);
-                day = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Trips.this, Trips.this, year, month, day);
-                datePickerDialog.show();
-            }
-        });
-
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animRotate);
-                edtNewCustName.setText("");
-                edtNewTotalCost.setText("");
-                edtNewServices.setText("");
+                if(firebaseAuth.getCurrentUser() != null) {
+                    Intent intent = new Intent(Trips.this, DialogNewTrip.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(Trips.this, "Authentication required!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -124,21 +88,6 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
         };
 
         lvTrips.setAdapter(firebaseTrsListAdapter);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animScale);
-                if(firebaseAuth.getCurrentUser() != null) {
-                    pushNewTrip();
-                }
-                else{
-                    Toast.makeText(Trips.this, "Authentication required!", Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
-
         lvTrips.setLongClickable(true);
         lvTrips.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -148,31 +97,5 @@ public class Trips extends AppCompatActivity implements DatePickerDialog.OnDateS
                 return true;
             }
         });
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        yearFinal = year;
-        monthFinal = month + 1;
-        dayFinal = day;
-
-        Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(Trips.this, Trips.this, hour, minute, true);
-        timePickerDialog.show();
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        hourFinal = hourOfDay;
-        minuteFinal = minute;
-
-        cal.set(Calendar.YEAR, yearFinal);
-        cal.set(Calendar.MONTH, monthFinal);
-        cal.set(Calendar.DAY_OF_MONTH, dayFinal);
-        cal.set(Calendar.HOUR_OF_DAY, hourFinal);
-        cal.set(Calendar.MINUTE, minuteFinal);
     }
 }

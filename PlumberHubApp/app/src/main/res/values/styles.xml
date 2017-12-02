@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NoTitleDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="windowNoTitle">true</item>
+        <item name="android:excludeFromRecents">true</item>
+    </style>
+
     <style name="btn_menu_style">
         <item name="android:textSize">@dimen/btn_menu</item>
         <item name="android:textColor">@color/colorPrimary</item>

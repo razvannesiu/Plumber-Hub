@@ -18,62 +18,12 @@
         android:text="@string/txt_cus"
         style="@style/txt_title_style"/>
 
-    <EditText
-        android:id="@+id/edtNewName"
+    <Button
+        android:id="@+id/btnAddCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/cus_hint_name"
-        />
-
-    <EditText
-        android:id="@+id/edtNewAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        android:hint="@string/cus_hint_address"
-        />
-
-    <EditText
-        android:id="@+id/edtNewPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="phone"
-        android:hint="@string/cus_hint_phone"
-        />
-
-    <EditText
-        android:id="@+id/edtNewEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/cus_hint_email"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnClearCustomer"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_clear"
-            style="@style/btn_non_menu_style"/>
-
-        <Button
-            android:id="@+id/btnSaveCustomer"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_save"
-            style="@style/btn_non_menu_style"/>
-
-    </LinearLayout>
+        android:text="@string/txt_add_cus"
+        style="@style/btn_non_menu_style"/>
 
     <ListView
         android:id="@+id/lvCust"

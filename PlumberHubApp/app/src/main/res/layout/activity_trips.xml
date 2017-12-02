@@ -18,60 +18,12 @@
         android:text="@string/txt_trs"
         style="@style/txt_title_style"/>
 
-    <EditText
-        android:id="@+id/edtNewCustName"
+    <Button
+        android:id="@+id/btnAddTrip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/trs_hint_name"
-        />
-
-    <EditText
-        android:id="@+id/edtNewServices"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/trs_hint_services"
-        />
-
-    <EditText
-        android:id="@+id/edtNewTotalCost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="@string/trs_hint_total_cost"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnClearTrip"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_clear"
-            style="@style/btn_non_menu_style"/>
-
-        <Button
-            android:id="@+id/btnPickDateTime"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_pick_date_time"
-            style="@style/btn_non_menu_style"/>
-
-        <Button
-            android:id="@+id/btnSaveTrip"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_save"
-            style="@style/btn_non_menu_style"/>
-
-    </LinearLayout>
+        android:text="@string/txt_add_trs"
+        style="@style/btn_non_menu_style"/>
 
     <ListView
         android:id="@+id/lvTrips"

@@ -6,11 +6,15 @@
     <string name="txt_cus">Customers</string>
     <string name="txt_srv">Services</string>
     <string name="txt_save">Save</string>
-    <string name="txt_upload">Upload Image</string>
+    <string name="txt_select_image">Select Image</string>
     <string name="txt_clear">Clear</string>
     <string name="txt_pick_date_time">Schedule Date</string>
     <string name="txt_logout">Log Out</string>
     <string name="txt_login">Log In</string>
+
+    <string name="txt_add_trs">Add New Trip</string>
+    <string name="txt_add_cus">Add New Customer</string>
+    <string name="txt_add_srv">Add New Service</string>
 
     <string name="tls_hint">Enter new tool name</string>
     <string name="cus_hint_name">Enter new name</string>

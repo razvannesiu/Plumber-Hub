@@ -1,4 +1,4 @@
-package android.plumberhub.com.plumberhubapp;
+package android.plumberhub.com.plumberhubapp.POJOs;
 
 import java.util.List;
 

@@ -22,7 +22,16 @@
         <activity android:name=".Customers" />
         <activity android:name=".Tools" />
         <activity android:name=".Services" />
-        <activity android:name=".Trips"/>
+        <activity android:name=".Trips" />
+        <activity
+            android:name=".DialogNewCustomer"
+            android:theme="@style/NoTitleDialog" />
+        <activity
+            android:name=".DialogNewTrip"
+            android:theme="@style/NoTitleDialog" />
+        <activity
+            android:name=".DialogNewService"
+            android:theme="@style/NoTitleDialog"/>
     </application>
 
 </manifest>

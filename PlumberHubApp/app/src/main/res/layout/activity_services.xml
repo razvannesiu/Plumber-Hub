@@ -18,68 +18,12 @@
         android:text="@string/txt_srv"
         style="@style/txt_title_style"/>
 
-    <EditText
-        android:id="@+id/edtNewTitle"
+    <Button
+        android:id="@+id/btnAddService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/srv_hint_title"
-        />
-
-    <EditText
-        android:id="@+id/edtNewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/srv_hint_description"
-        />
-
-    <EditText
-        android:id="@+id/edtNewTools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/srv_hint_tools"
-        />
-
-    <EditText
-        android:id="@+id/edtNewPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="@string/srv_hint_price"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnClearService"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_clear"
-            style="@style/btn_non_menu_style"/>
-
-        <Button
-            android:id="@+id/btnUploadImage"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_upload"
-            style="@style/btn_non_menu_style"/>
-
-        <Button
-            android:id="@+id/btnSaveService"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/txt_save"
-            style="@style/btn_non_menu_style"/>
-    </LinearLayout>
+        android:text="@string/txt_add_srv"
+        style="@style/btn_non_menu_style"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcv_list_img"
