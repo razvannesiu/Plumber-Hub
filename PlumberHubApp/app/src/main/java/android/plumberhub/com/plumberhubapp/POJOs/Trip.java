@@ -1,6 +1,5 @@
 package android.plumberhub.com.plumberhubapp.POJOs;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class Trip {
     private String customerName;
-    private Date date;
+    private long time;
     private List<String> services;
     private double totalCost;
 
@@ -17,9 +16,9 @@ public class Trip {
 
     }
 
-    public Trip(String customerName, Date date, List<String> services, double totalCost) {
+    public Trip(String customerName, long date, List<String> services, double totalCost) {
         this.customerName = customerName;
-        this.date = date;
+        this.time = date;
         this.services = services;
         this.totalCost = totalCost;
     }
@@ -32,12 +31,12 @@ public class Trip {
         this.customerName = customerName;
     }
 
-    public Date getDate() {
-        return date;
+    public long getTime() {
+        return time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTime(long time) {
+        this.time = time;
     }
 
     public List<String> getServices() {

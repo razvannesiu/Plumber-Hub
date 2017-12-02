@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,7 +54,7 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
         }
         double totalCost = Double.parseDouble(edtNewTotalCost.getText().toString());
         Date date = cal.getTime();
-        Trip trip = new Trip(customerName, date, services, totalCost);
+        Trip trip = new Trip(customerName, date.getTime(), services, totalCost);
 
         mTrsDatabase.push().setValue(trip);
     }
@@ -111,7 +112,7 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         yearFinal = year;
-        monthFinal = month + 1;
+        monthFinal = month;
         dayFinal = day;
 
         Calendar c = Calendar.getInstance();

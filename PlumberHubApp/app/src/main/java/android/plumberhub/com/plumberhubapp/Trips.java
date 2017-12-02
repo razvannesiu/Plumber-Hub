@@ -1,22 +1,18 @@
 package android.plumberhub.com.plumberhubapp;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.plumberhub.com.plumberhubapp.POJOs.Trip;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -24,11 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class Trips extends AppCompatActivity {
@@ -70,7 +63,7 @@ public class Trips extends AppCompatActivity {
                 this,
                 Trip.class,
                 R.layout.widget_trips,
-                mTrsDatabase.orderByChild("totalCost")
+                mTrsDatabase.orderByChild("time")
         ) {
             @Override
             protected void populateView(View v, Trip model, int position) {
@@ -81,9 +74,14 @@ public class Trips extends AppCompatActivity {
 
                 txtCustName.setText(model.getCustomerName());
                 txtServices.setText(String.valueOf("Services: " + TextUtils.join(", ", model.getServices())));
-                String formattedDate = new SimpleDateFormat("EEE, d MMM yyyy HH:mm", Locale.getDefault()).format(model.getDate());
+                String formattedDate = new SimpleDateFormat("EEE, d MMM yyyy HH:mm", Locale.getDefault()).format(new Date(model.getTime()));
                 txtDate.setText(formattedDate);
                 txtTotalCost.setText(String.valueOf("$" + model.getTotalCost()));
+            }
+
+            @Override
+            public View getView(int position, View view, ViewGroup viewGroup) {
+                return super.getView(getCount() - position - 1, view, viewGroup);
             }
         };
 
@@ -93,7 +91,7 @@ public class Trips extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
-                firebaseTrsListAdapter.getRef(pos).removeValue();
+                firebaseTrsListAdapter.getRef(firebaseTrsListAdapter.getCount() - pos - 1).removeValue();
                 return true;
             }
         });
