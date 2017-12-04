@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -161,8 +162,12 @@ public class DialogNewService extends AppCompatActivity {
             }
         });
 
-        mDataReference = FirebaseDatabase.getInstance().getReference("services");
-        imageReference = FirebaseStorage.getInstance().getReference().child("images");
+        mDataReference = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("services");
+
+        imageReference = FirebaseStorage.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("images");
+
         fileRef = null;
         progressDialog = new ProgressDialog(this);
 

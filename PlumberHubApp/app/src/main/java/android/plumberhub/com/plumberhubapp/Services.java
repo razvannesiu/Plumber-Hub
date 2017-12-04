@@ -74,7 +74,9 @@ public class Services extends AppCompatActivity {
             }
         });
 
-        mDataReference = FirebaseDatabase.getInstance().getReference("services");
+        mDataReference = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(firebaseAuth.getCurrentUser().getUid()).child("services");
+
         Query query = mDataReference.limitToLast(MAX_CARDS);
 
         mAdapter = new FirebaseRecyclerAdapter<Service, ServiceViewHolder>(

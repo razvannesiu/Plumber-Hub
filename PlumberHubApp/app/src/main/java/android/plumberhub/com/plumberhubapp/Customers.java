@@ -34,8 +34,9 @@ public class Customers extends AppCompatActivity {
         setContentView(R.layout.activity_customers);
 
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
-        mCusDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/customers");
         firebaseAuth = FirebaseAuth.getInstance();
+        mCusDatabase = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(firebaseAuth.getCurrentUser().getUid()).child("customers");
         lvCustomers = (ListView) findViewById(R.id.lvCust);
         btnAddCust = (Button) findViewById(R.id.btnAddCustomer);
 

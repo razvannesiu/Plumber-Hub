@@ -45,7 +45,8 @@ public class Tools extends AppCompatActivity {
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/tools");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(firebaseAuth.getCurrentUser().getUid()).child("tools");
 
         btnSave = (Button) findViewById(R.id.btnSaveTool);
         edtNewTool = (EditText) findViewById(R.id.edtNewTool);
@@ -70,6 +71,7 @@ public class Tools extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animScale);
+
                 if(firebaseAuth.getCurrentUser() != null) {
                     pushNewTool();
                 }

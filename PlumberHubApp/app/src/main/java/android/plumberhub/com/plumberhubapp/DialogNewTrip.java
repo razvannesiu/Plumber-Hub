@@ -67,7 +67,9 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
         animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
-        mTrsDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/trips");
+        mTrsDatabase = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("trips");
+
 
         btnSave = (Button) findViewById(R.id.btnSaveTrip);
         btnClear = (Button) findViewById(R.id.btnClearTrip);

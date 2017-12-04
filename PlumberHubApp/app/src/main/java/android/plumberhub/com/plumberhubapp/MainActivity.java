@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,7 +101,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(shouldNavigate) {
-            startActivity(intent);
+            if(firebaseAuth.getCurrentUser() != null){
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Authentication required!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

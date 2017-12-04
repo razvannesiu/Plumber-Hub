@@ -40,7 +40,8 @@ public class Trips extends AppCompatActivity {
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        mTrsDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/trips");
+        mTrsDatabase = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(firebaseAuth.getCurrentUser().getUid()).child("trips");
 
         lvTrips = (ListView) findViewById(R.id.lvTrips);
         btnAddTrip = (Button) findViewById(R.id.btnAddTrip);

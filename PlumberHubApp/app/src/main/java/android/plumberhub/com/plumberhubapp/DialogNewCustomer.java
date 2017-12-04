@@ -8,8 +8,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.lang.reflect.Field;
 
 public class DialogNewCustomer extends AppCompatActivity {
 
@@ -40,7 +44,8 @@ public class DialogNewCustomer extends AppCompatActivity {
 
         animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
-        mCusDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://plumber-hub.firebaseio.com/customers");
+        mCusDatabase = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("customers");
 
         btnSave = (Button) findViewById(R.id.btnSaveCustomer);
         btnClear = (Button) findViewById(R.id.btnClearCustomer);
