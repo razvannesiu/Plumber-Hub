@@ -38,6 +38,9 @@
     <style name="txt_widget_cus_style">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/txt_widget_cus</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="txt_widget_trs_style">

@@ -11,6 +11,10 @@
     <string name="txt_pick_date_time">Schedule Date</string>
     <string name="txt_logout">Log Out</string>
     <string name="txt_login">Log In</string>
+    <string name="txt_call">Call Number</string>
+    <string name="txt_send_email">Send Email</string>
+    <string name="txt_send_text">Send Text</string>
+    <string name="txt_save_contact">Save Contact</string>
 
     <string name="txt_add_trs">Add New Trip</string>
     <string name="txt_add_cus">Add New Customer</string>
