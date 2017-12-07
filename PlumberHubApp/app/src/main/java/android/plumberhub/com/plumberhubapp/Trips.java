@@ -207,7 +207,6 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == CAMERA_REQ_CODE && resultCode == RESULT_OK){
-//            listOfImages.add("https://firebasestorage.googleapis.com/v0/b/plumber-hub.appspot.com/o/users%2F2JyD7sf2j6MPxkG6TV7bbp0tbCN2%2Fimages%2Fservice7793.jpg?alt=media&token=0a9e9752-bfad-4cf8-a307-eca9b26cdfc9");
             File imageFile = new File(Environment.getExternalStorageDirectory(), "image.jpg");
             Uri mPhotoUri = FileProvider.getUriForFile(Trips.this,
                     Trips.this.getApplicationContext().getPackageName() +
@@ -300,9 +299,7 @@ class BuildPdfTask extends AsyncTask<TaskCompletionHandler, Image[], Image[]> {
             float width = document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin();
             float height = document.getPageSize().getHeight() - document.topMargin() - document.bottomMargin();
             img.scaleToFit(width, height);
-//            float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
-//                    - document.rightMargin() - 0) / img.getWidth()) * 100; // 0 for no indentation
-//            img.scalePercent(scaler);
+
             img.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
 
             try {

@@ -17,9 +17,9 @@ public class Trip {
 
     }
 
-    public Trip(String customerName, String email, long time, List<String> services, double totalCost) {
+    public Trip(String customerName, String customerEmail, long time, List<String> services, double totalCost) {
         this.customerName = customerName;
-        this.customerEmail = email;
+        this.customerEmail = customerEmail;
         this.time = time;
         this.services = services;
         this.totalCost = totalCost;

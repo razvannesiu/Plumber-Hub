@@ -43,7 +43,7 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
     private EditText edtNewCustEmail;
     private EditText edtNewServices;
     private EditText edtNewTotalCost;
-    private static Calendar cal = Calendar.getInstance();
+    private Calendar cal = Calendar.getInstance();
     private int day = 0, month = 0, year = 2017, hour = 0, minute = 0,
             dayFinal = 0, monthFinal = 0, yearFinal = 2017, hourFinal = 0, minuteFinal = 0;
 
@@ -56,6 +56,8 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
         }
         double totalCost = Double.parseDouble(edtNewTotalCost.getText().toString());
         Date date = cal.getTime();
+        Toast.makeText(this, new SimpleDateFormat("EEE, d MMM yyyy HH:mm",
+                Locale.getDefault()).format(new Date(date.getTime())), Toast.LENGTH_LONG).show();
         Trip trip = new Trip(customerName, customerEmail, date.getTime(), services, totalCost);
 
         mTrsDatabase.push().setValue(trip);
@@ -119,6 +121,9 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
         yearFinal = year;
         monthFinal = month;
         dayFinal = day;
+
+        Toast.makeText(this, "year: " + yearFinal + ", month: " + monthFinal +
+                ", day: " + dayFinal, Toast.LENGTH_LONG).show();
 
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
