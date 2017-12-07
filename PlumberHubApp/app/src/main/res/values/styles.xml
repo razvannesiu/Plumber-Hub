@@ -52,4 +52,8 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
+    <style name="picker" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

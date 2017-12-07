@@ -56,8 +56,7 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
         }
         double totalCost = Double.parseDouble(edtNewTotalCost.getText().toString());
         Date date = cal.getTime();
-        Toast.makeText(this, new SimpleDateFormat("EEE, d MMM yyyy HH:mm",
-                Locale.getDefault()).format(new Date(date.getTime())), Toast.LENGTH_LONG).show();
+
         Trip trip = new Trip(customerName, customerEmail, date.getTime(), services, totalCost);
 
         mTrsDatabase.push().setValue(trip);
@@ -91,7 +90,8 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
                 month = c.get(Calendar.MONTH);
                 day = c.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(DialogNewTrip.this, DialogNewTrip.this, year, month, day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(DialogNewTrip.this,
+                        R.style.picker, DialogNewTrip.this, year, month, day);
                 datePickerDialog.show();
             }
         });
@@ -120,16 +120,14 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         yearFinal = year;
         monthFinal = month;
-        dayFinal = day;
-
-        Toast.makeText(this, "year: " + yearFinal + ", month: " + monthFinal +
-                ", day: " + dayFinal, Toast.LENGTH_LONG).show();
+        dayFinal = dayOfMonth;
 
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(DialogNewTrip.this, DialogNewTrip.this, hour, minute, true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(DialogNewTrip.this,
+                R.style.picker, DialogNewTrip.this, hour, minute, true);
         timePickerDialog.show();
     }
 
