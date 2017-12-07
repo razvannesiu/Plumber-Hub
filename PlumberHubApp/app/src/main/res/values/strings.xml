@@ -23,6 +23,10 @@
     <string name="txt_add_cus">Add New Customer</string>
     <string name="txt_add_srv">Add New Service</string>
 
+    <string name="txt_edit_trs">Add New Trip</string>
+    <string name="txt_edit_cus">Add New Customer</string>
+    <string name="txt_edit_tls">Edit Tool</string>
+
     <string name="tls_hint">Enter tool name</string>
     <string name="cus_hint_name">Enter name</string>
     <string name="cus_hint_email">Enter email</string>
@@ -52,5 +56,10 @@
     <string name="customer_address">6821 Main Street, Vancouver</string>
     <string name="customer_email">nesiurazvan@yahoo.com</string>
     <string name="customer_phone">6048091984</string>
+
+    <string-array name="tls_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
 
 </resources>

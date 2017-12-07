@@ -1,7 +1,11 @@
 package android.plumberhub.com.plumberhubapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -32,6 +36,9 @@ public class Tools extends AppCompatActivity {
     private EditText edtNewTool;
     private ListView lvTools;
     private FirebaseAuth firebaseAuth;
+    private FirebaseListAdapter<String> firebaseListAdapter;
+    static DatabaseReference toolToEdit;
+
 
     private void pushNewTool(){
         mDatabase.push().setValue(edtNewTool.getText().toString());
@@ -52,7 +59,7 @@ public class Tools extends AppCompatActivity {
         edtNewTool = (EditText) findViewById(R.id.edtNewTool);
         lvTools = (ListView) findViewById(R.id.lvTools);
 
-        final FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
+        firebaseListAdapter = new FirebaseListAdapter<String>(
                 this,
                 String.class,
                 android.R.layout.simple_list_item_1,
@@ -66,6 +73,7 @@ public class Tools extends AppCompatActivity {
         };
 
         lvTools.setAdapter(firebaseListAdapter);
+        registerForContextMenu(lvTools);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,14 +89,49 @@ public class Tools extends AppCompatActivity {
             }
         });
 
-        lvTools.setLongClickable(true);
-        lvTools.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id) {
-                firebaseListAdapter.getRef(pos).removeValue();
-                return true;
-            }
-        });
+//        lvTools.setLongClickable(true);
+//        lvTools.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+//                                           int pos, long id) {
+//                firebaseListAdapter.getRef(pos).removeValue();
+//                return true;
+//            }
+//        });
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.lvTools) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            menu.setHeaderTitle(String.valueOf(lvTools.getItemAtPosition(info.position)));
+            String[] menuItems = getResources().getStringArray(R.array.tls_menu);
+            for (int i = 0; i < menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.tls_menu);
+        String menuItemName = menuItems[menuItemIndex];
+        String listItemName = (String) lvTools.getItemAtPosition(info.position);
+
+        switch (menuItemName){
+            case "Edit":
+                Intent intent = new Intent(Tools.this, DialogEditTool.class);
+                toolToEdit = firebaseListAdapter.getRef(info.position);
+                startActivity(intent);
+                break;
+            case "Delete":
+                firebaseListAdapter.getRef(info.position).removeValue();
+                break;
+        }
+        return true;
+    }
+
 }
