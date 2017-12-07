@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Trip {
     private String customerName;
+    private String customerEmail;
     private long time;
     private List<String> services;
     private double totalCost;
@@ -16,11 +17,20 @@ public class Trip {
 
     }
 
-    public Trip(String customerName, long date, List<String> services, double totalCost) {
+    public Trip(String customerName, String email, long time, List<String> services, double totalCost) {
         this.customerName = customerName;
-        this.time = date;
+        this.customerEmail = email;
+        this.time = time;
         this.services = services;
         this.totalCost = totalCost;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public String getCustomerName() {

@@ -15,23 +15,27 @@
     <string name="txt_send_email">Send Email</string>
     <string name="txt_send_text">Send Text</string>
     <string name="txt_save_contact">Save Contact</string>
+    <string name="txt_clear_images">Clear Images</string>
+    <string name="txt_email_invoice">Email Invoice</string>
+    <string name="txt_take_picture">Take Picture</string>
 
     <string name="txt_add_trs">Add New Trip</string>
     <string name="txt_add_cus">Add New Customer</string>
     <string name="txt_add_srv">Add New Service</string>
 
-    <string name="tls_hint">Enter new tool name</string>
-    <string name="cus_hint_name">Enter new name</string>
-    <string name="cus_hint_email">Enter new email</string>
-    <string name="cus_hint_phone">Enter new phone</string>
-    <string name="cus_hint_address">Enter new address</string>
-    <string name="srv_hint_title">Enter new title</string>
-    <string name="srv_hint_description">Enter new description</string>
-    <string name="srv_hint_tools">Enter new comma-separated tools</string>
-    <string name="srv_hint_price">Enter new price</string>
-    <string name="trs_hint_name">Enter new customer name</string>
-    <string name="trs_hint_services">Enter new comma-separated services</string>
-    <string name="trs_hint_total_cost">Enter new total cost</string>
+    <string name="tls_hint">Enter tool name</string>
+    <string name="cus_hint_name">Enter name</string>
+    <string name="cus_hint_email">Enter email</string>
+    <string name="cus_hint_phone">Enter phone</string>
+    <string name="cus_hint_address">Enter address</string>
+    <string name="srv_hint_title">Enter title</string>
+    <string name="srv_hint_description">Enter description</string>
+    <string name="srv_hint_tools">Enter comma-separated tools</string>
+    <string name="srv_hint_price">Enter price</string>
+    <string name="trs_hint_name">Enter customer name</string>
+    <string name="trs_hint_services">Enter comma-separated services</string>
+    <string name="trs_hint_total_cost">Enter total cost</string>
+    <string name="trs_hint_cust_email">Enter customer email</string>
 
     <string name="service_title">Title</string>
     <string name="service_price">$%.2f</string>
@@ -42,6 +46,7 @@
     <string name="trip_price">$25</string>
     <string name="trip_services">Services: Bathtub Reparation, Leaf Raking</string>
     <string name="trip_date">25, December 2017, 15:30</string>
+    <string name="trip_cust_email">razvannesiu@gmail.com</string>
 
     <string name="customer_name">Razvan Nesiu</string>
     <string name="customer_address">6821 Main Street, Vancouver</string>

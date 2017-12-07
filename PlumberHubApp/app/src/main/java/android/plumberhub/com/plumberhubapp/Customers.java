@@ -52,7 +52,7 @@ public class Customers extends AppCompatActivity {
                 "mailto",email, null));
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
-        startActivity(Intent.createChooser(intent, "Choose an Email client:"));
+        startActivity(Intent.createChooser(intent, "Choose an email client:"));
     }
 
     private void sendText(String number, String text){
@@ -64,7 +64,7 @@ public class Customers extends AppCompatActivity {
 
     private void callNumber(String number){
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
-        callIntent.setData(Uri.parse("tel:"+number));
+        callIntent.setData(Uri.parse("tel:" + number));
         startActivity(callIntent);
     }
 

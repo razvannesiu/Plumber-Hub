@@ -40,21 +40,23 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
     Animation animScale;
     Animation animRotate;
     private EditText edtNewCustName;
+    private EditText edtNewCustEmail;
     private EditText edtNewServices;
     private EditText edtNewTotalCost;
-    private Calendar cal = Calendar.getInstance();
+    private static Calendar cal = Calendar.getInstance();
     private int day = 0, month = 0, year = 2017, hour = 0, minute = 0,
             dayFinal = 0, monthFinal = 0, yearFinal = 2017, hourFinal = 0, minuteFinal = 0;
 
     private void pushNewTrip(){
         String customerName = edtNewCustName.getText().toString();
+        String customerEmail = edtNewCustEmail.getText().toString();
         List<String> services = new ArrayList<>();
         for (String s: edtNewServices.getText().toString().split(",")){
             services.add(s);
         }
         double totalCost = Double.parseDouble(edtNewTotalCost.getText().toString());
         Date date = cal.getTime();
-        Trip trip = new Trip(customerName, date.getTime(), services, totalCost);
+        Trip trip = new Trip(customerName, customerEmail, date.getTime(), services, totalCost);
 
         mTrsDatabase.push().setValue(trip);
     }
@@ -70,11 +72,11 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
         mTrsDatabase = FirebaseDatabase.getInstance().getReference().child("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("trips");
 
-
         btnSave = (Button) findViewById(R.id.btnSaveTrip);
         btnClear = (Button) findViewById(R.id.btnClearTrip);
         btnPick = (Button) findViewById(R.id.btnPickDateTime);
         edtNewCustName = (EditText) findViewById(R.id.edtNewCustName);
+        edtNewCustEmail = (EditText) findViewById(R.id.edtNewCustEmail);
         edtNewTotalCost = (EditText) findViewById(R.id.edtNewTotalCost);
         edtNewServices = (EditText) findViewById(R.id.edtNewServices);
 
@@ -97,6 +99,7 @@ public class DialogNewTrip extends AppCompatActivity implements DatePickerDialog
             public void onClick(View v) {
                 v.startAnimation(animRotate);
                 edtNewCustName.setText("");
+                edtNewCustEmail.setText("");
                 edtNewTotalCost.setText("");
                 edtNewServices.setText("");
             }

@@ -14,6 +14,11 @@
         style="@style/txt_widget_trs_style"/>
 
     <TextView
+        android:id="@+id/txtCustEmail"
+        android:text="@string/trip_cust_email"
+        style="@style/txt_widget_trs_style"/>
+
+    <TextView
         android:id="@+id/txtDate"
         android:text="@string/trip_date"
         android:textColor="@color/colorPrimaryDark"
@@ -29,4 +34,35 @@
         android:text="@string/trip_price"
         android:textStyle="bold"
         style="@style/txt_widget_trs_style"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClearImages"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_clear_images"
+            style="@style/btn_non_menu_style"/>
+
+        <Button
+            android:id="@+id/btnTakePic"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_take_picture"
+            style="@style/btn_non_menu_style"/>
+
+        <Button
+            android:id="@+id/btnEmailInvoice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_email_invoice"
+            style="@style/btn_non_menu_style"/>
+
+    </LinearLayout>
 </LinearLayout>
