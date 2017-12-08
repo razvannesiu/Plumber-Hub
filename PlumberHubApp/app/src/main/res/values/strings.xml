@@ -11,7 +11,7 @@
     <string name="txt_pick_date_time">Schedule Date</string>
     <string name="txt_logout">Log Out</string>
     <string name="txt_login">Log In</string>
-    <string name="txt_call">Call Number</string>
+    <string name="txt_call">Call</string>
     <string name="txt_send_email">Send Email</string>
     <string name="txt_send_text">Send Text</string>
     <string name="txt_save_contact">Save Contact</string>
@@ -23,8 +23,8 @@
     <string name="txt_add_cus">Add New Customer</string>
     <string name="txt_add_srv">Add New Service</string>
 
-    <string name="txt_edit_trs">Add New Trip</string>
-    <string name="txt_edit_cus">Add New Customer</string>
+    <string name="txt_edit_trs">Edit Trip</string>
+    <string name="txt_edit_cus">Edit Customer</string>
     <string name="txt_edit_tls">Edit Tool</string>
 
     <string name="tls_hint">Enter tool name</string>
@@ -60,6 +60,20 @@
     <string-array name="tls_menu">
         <item>Edit</item>
         <item>Delete</item>
+    </string-array>
+
+    <string-array name="trs_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
+    <string-array name="cus_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+        <item>Call</item>
+        <item>Save Contact</item>
+        <item>Send Text</item>
+        <item>Send Email</item>
     </string-array>
 
 </resources>

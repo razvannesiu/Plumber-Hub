@@ -124,6 +124,7 @@ public class Tools extends AppCompatActivity {
         switch (menuItemName){
             case "Edit":
                 Intent intent = new Intent(Tools.this, DialogEditTool.class);
+                intent.putExtra("tool", listItemName);
                 toolToEdit = firebaseListAdapter.getRef(info.position);
                 startActivity(intent);
                 break;

@@ -6,6 +6,9 @@ import android.plumberhub.com.plumberhubapp.POJOs.Customer;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -33,6 +36,8 @@ public class Customers extends AppCompatActivity {
     private ListView lvCustomers;
     private FirebaseAuth firebaseAuth;
     private Animation animScale;
+    private FirebaseListAdapter<Customer> firebaseCustListAdapter;
+    static DatabaseReference customerToEdit;
 
     private void saveContact(Customer customer){
         Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
@@ -93,7 +98,7 @@ public class Customers extends AppCompatActivity {
             }
         });
 
-        final FirebaseListAdapter<Customer> firebaseCustListAdapter = new FirebaseListAdapter<Customer>(
+        firebaseCustListAdapter = new FirebaseListAdapter<Customer>(
                 this,
                 Customer.class,
                 R.layout.widget_customers,
@@ -105,62 +110,64 @@ public class Customers extends AppCompatActivity {
                 TextView txtAddress = (TextView) v.findViewById(R.id.txtAddress);
                 TextView txtPhone = (TextView) v.findViewById(R.id.txtPhone);
                 TextView txtEmail = (TextView) v.findViewById(R.id.txtEmail);
-                Button btnCall = (Button) v.findViewById(R.id.btnCall);
-                Button btnSaveContact = (Button) v.findViewById(R.id.btnSaveContact);
-                Button btnSendText = (Button) v.findViewById(R.id.btnSendText);
-                Button btnSendEmail = (Button) v.findViewById(R.id.btnSendEmail);
-                final Customer customer = model;
-
-                btnCall.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animScale);
-                        callNumber(customer.getPhone());
-                    }
-                });
-
-                btnSendText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animScale);
-                        sendText(customer.getPhone(), "Hi! I'm texting you because ... ");
-                    }
-                });
-
-                btnSendEmail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animScale);
-                        sendEmail(customer.getEmail(), "Plumber Hub",
-                                "Hi! I just wanted to inform you that ... ");
-                    }
-                });
-
-                btnSaveContact.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animScale);
-                        saveContact(customer);
-                    }
-                });
 
                 txtName.setText(model.getName());
                 txtAddress.setText(model.getAddress());
                 txtPhone.setText(model.getPhone());
                 txtEmail.setText(model.getEmail());
-                //v.setBackgroundColor(position % 2 != 0? Color.LTGRAY : Color.WHITE);
             }
         };
 
         lvCustomers.setAdapter(firebaseCustListAdapter);
-        lvCustomers.setLongClickable(true);
-        lvCustomers.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id) {
-                firebaseCustListAdapter.getRef(pos).removeValue();
-                return true;
+        registerForContextMenu(lvCustomers);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.lvCust) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            Customer customer = (Customer) lvCustomers.getItemAtPosition(info.position);
+            menu.setHeaderTitle(customer.getName());
+            String[] menuItems = getResources().getStringArray(R.array.cus_menu);
+            for (int i = 0; i < menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
             }
-        });
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.cus_menu);
+        String menuItemName = menuItems[menuItemIndex];
+        Customer customer = (Customer) lvCustomers.getItemAtPosition(info.position);
+
+        switch (menuItemName){
+            case "Edit":
+                Intent intent = new Intent(Customers.this, DialogEditCustomer.class);
+                customerToEdit = firebaseCustListAdapter.getRef(info.position);
+                intent.putExtra("customer", customer);
+                startActivity(intent);
+                break;
+            case "Delete":
+                firebaseCustListAdapter.getRef(info.position).removeValue();
+                break;
+            case "Call":
+                callNumber(customer.getPhone());
+                break;
+            case "Send Email":
+                sendEmail(customer.getEmail(), "Plumber Hub",
+                        "Hi! I just wanted to inform you that ... ");
+                break;
+            case "Send Text":
+                sendText(customer.getPhone(), "Hi! I'm texting you because ... ");
+                break;
+            case "Save Contact":
+                saveContact(customer);
+                break;
+        }
+        return true;
     }
 }

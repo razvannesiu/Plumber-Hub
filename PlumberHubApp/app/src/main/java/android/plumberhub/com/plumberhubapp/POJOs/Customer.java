@@ -1,10 +1,12 @@
 package android.plumberhub.com.plumberhubapp.POJOs;
 
+import java.io.Serializable;
+
 /**
  * Created by razva on 2017-11-26.
  */
 
-public class Customer {
+public class Customer implements Serializable {
 
     private String name;
     private String address;

@@ -49,6 +49,9 @@
         <activity
             android:name=".DialogEditTool"
             android:theme="@style/NoTitleDialog" />
+        <activity
+            android:name=".DialogEditCustomer"
+            android:theme="@style/NoTitleDialog" />
     </application>
 
 </manifest>

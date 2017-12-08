@@ -1,12 +1,13 @@
 package android.plumberhub.com.plumberhubapp.POJOs;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by razva on 2017-11-29.
  */
 
-public class Trip {
+public class Trip{
     private String customerName;
     private String customerEmail;
     private long time;

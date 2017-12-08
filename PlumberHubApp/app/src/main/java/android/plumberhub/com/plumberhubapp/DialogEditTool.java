@@ -23,11 +23,13 @@ public class DialogEditTool extends AppCompatActivity {
 
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         edtEditTool = (EditText) findViewById(R.id.edtEditTool);
+        edtEditTool.setText((String) getIntent().getSerializableExtra("tool"));
         btnSaveTool = (Button) findViewById(R.id.btnSaveEditedTool);
 
         btnSaveTool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animScale);
                 toolToEdit.setValue(edtEditTool.getText().toString());
                 finish();
             }
