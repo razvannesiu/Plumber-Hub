@@ -88,16 +88,6 @@ public class Tools extends AppCompatActivity {
                 }
             }
         });
-
-//        lvTools.setLongClickable(true);
-//        lvTools.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-//                                           int pos, long id) {
-//                firebaseListAdapter.getRef(pos).removeValue();
-//                return true;
-//            }
-//        });
     }
 
     @Override

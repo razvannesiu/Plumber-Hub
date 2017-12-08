@@ -28,43 +28,4 @@
         android:text="@string/customer_email"
         style="@style/txt_widget_cus_style"/>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnSaveContact"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1.1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/txt_save_contact"-->
-            <!--style="@style/btn_non_menu_style"/>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnCall"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/txt_call"-->
-            <!--style="@style/btn_non_menu_style"/>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnSendText"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/txt_send_text"-->
-            <!--style="@style/btn_non_menu_style"/>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnSendEmail"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/txt_send_email"-->
-            <!--style="@style/btn_non_menu_style"/>-->
-
-    <!--</LinearLayout>-->
-
 </LinearLayout>

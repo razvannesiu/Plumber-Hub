@@ -7,7 +7,7 @@ import java.util.List;
  * Created by razva on 2017-11-29.
  */
 
-public class Trip{
+public class Trip implements Serializable{
     private String customerName;
     private String customerEmail;
     private long time;

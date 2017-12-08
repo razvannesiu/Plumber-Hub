@@ -11,6 +11,9 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -67,8 +70,10 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
     static Document document;
     static Trip currentTrip;
     static Uri pdfUri;
+    static DatabaseReference tripToEdit;
+    private static FirebaseListAdapter<Trip> firebaseTrsListAdapter;
 
-    void uploadPdf(Uri uri){
+    void uploadPdfThenSendInvoice(Uri uri){
         StorageReference pdfStorageRef = FirebaseStorage.getInstance().getReference().child("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("invoices")
                 .child(uri.getLastPathSegment());
@@ -78,6 +83,19 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
         pdfStorageRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                String name = currentTrip.getCustomerName().contains(" ")?
+                        currentTrip.getCustomerName().split(" ")[0] : currentTrip.getCustomerName();
+                String formattedDate = new SimpleDateFormat("EEE, d MMM yyyy HH:mm",
+                        Locale.getDefault()).format(new Date(currentTrip.getTime()));
+
+                emailInvoice(pdfUri, currentTrip.getCustomerEmail(),"Invoice - " + formattedDate,
+                        "Hi " + name +
+                                ",\n\nThis is your invoice for the " +
+                                "trip that took place on the date of " + formattedDate +
+                                ". Your total cost is $" + currentTrip.getTotalCost() +
+                                " for the services: " + TextUtils.join(", ", currentTrip.getServices()) +
+                                ". Please find the invoice attached below.\n\nThank you," +
+                                "\nPlumber Hub");
                 mProgress.dismiss();
             }
         });
@@ -123,7 +141,7 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
             }
         });
 
-        final FirebaseListAdapter<Trip> firebaseTrsListAdapter = new FirebaseListAdapter<Trip>(
+        firebaseTrsListAdapter = new FirebaseListAdapter<Trip>(
                 this,
                 Trip.class,
                 R.layout.widget_trips,
@@ -136,9 +154,6 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
                 TextView txtServices = (TextView) v.findViewById(R.id.txtServices);
                 TextView txtDate = (TextView) v.findViewById(R.id.txtDate);
                 TextView txtTotalCost = (TextView) v.findViewById(R.id.txtTotalCost);
-                Button btnClearImages = (Button) v.findViewById(R.id.btnClearImages);
-                Button btnTakePicture = (Button) v.findViewById(R.id.btnTakePic);
-                Button btnEmailInvoice = (Button) v.findViewById(R.id.btnEmailInvoice);
 
                 txtCustName.setText(model.getCustomerName());
                 txtCustEmail.setText(model.getCustomerEmail());
@@ -146,42 +161,6 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
                 txtDate.setText( new SimpleDateFormat("EEE, d MMM yyyy HH:mm",
                         Locale.getDefault()).format(new Date(model.getTime())));
                 txtTotalCost.setText(String.valueOf("$" + model.getTotalCost()));
-                final Trip currModel = model;
-
-                btnClearImages.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animRotate);
-                        Toast.makeText(Trips.this, (listOfImages.size() == 1? "One image":
-                                listOfImages.size() + " images")
-                                + " cleared!", Toast.LENGTH_LONG).show();
-                        listOfImages.clear();
-                    }
-                });
-
-                btnTakePicture.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animScale);
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        File imageFile = new File(Environment.getExternalStorageDirectory(), "image.jpg");
-                        Uri mPhotoUri = FileProvider.getUriForFile(Trips.this,
-                                Trips.this.getApplicationContext().getPackageName() +
-                                        ".provider", imageFile);
-                        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mPhotoUri);
-                        startActivityForResult(intent, CAMERA_REQ_CODE);
-                    }
-                });
-
-                btnEmailInvoice.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.startAnimation(animScale);
-                        currentTrip = currModel;
-                        new BuildPdfTask().execute(Trips.this);
-                    }
-                });
             }
 
             @Override
@@ -191,15 +170,76 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
         };
 
         lvTrips.setAdapter(firebaseTrsListAdapter);
-        lvTrips.setLongClickable(true);
-        lvTrips.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id) {
-                firebaseTrsListAdapter.getRef(firebaseTrsListAdapter.getCount() - pos - 1).removeValue();
-                return true;
+        registerForContextMenu(lvTrips);
+    }
+
+    private void clearImages(){
+        Toast.makeText(Trips.this, (listOfImages.size() == 1? "One image":
+                listOfImages.size() + " images")
+                + " cleared!", Toast.LENGTH_LONG).show();
+        listOfImages.clear();
+    }
+
+    private void takePicture(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        File imageFile = new File(Environment.getExternalStorageDirectory(), "image.jpg");
+        Uri mPhotoUri = FileProvider.getUriForFile(Trips.this,
+                Trips.this.getApplicationContext().getPackageName() +
+                        ".provider", imageFile);
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mPhotoUri);
+        startActivityForResult(intent, CAMERA_REQ_CODE);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.lvTrips) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            Trip trip = (Trip) lvTrips.getItemAtPosition(firebaseTrsListAdapter.getCount()
+                    - info.position - 1);
+            menu.setHeaderTitle(new SimpleDateFormat("EEE, d MMM yyyy HH:mm",
+                    Locale.getDefault()).format(new Date(trip.getTime())));
+            String[] menuItems = getResources().getStringArray(R.array.trs_menu);
+            for (int i = 0; i < menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
             }
-        });
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.trs_menu);
+        String menuItemName = menuItems[menuItemIndex];
+        Trip trip = (Trip) lvTrips.getItemAtPosition(firebaseTrsListAdapter.getCount()
+                - info.position - 1);
+
+        switch (menuItemName){
+            case "Edit":
+                Intent editIntent = new Intent(Trips.this, DialogEditTrip.class);
+                tripToEdit = firebaseTrsListAdapter.getRef(firebaseTrsListAdapter.getCount()
+                        - info.position - 1);
+                editIntent.putExtra("trip", trip);
+                startActivity(editIntent);
+                break;
+            case "Delete":
+                firebaseTrsListAdapter.getRef(firebaseTrsListAdapter.getCount()
+                        - info.position - 1).removeValue();
+                break;
+            case "Clear Images":
+                clearImages();
+                break;
+            case "Take Picture":
+                takePicture();
+                break;
+            case "Email Invoice":
+                currentTrip = trip;
+                new BuildPdfTask().execute(Trips.this);
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -242,20 +282,7 @@ public class Trips extends AppCompatActivity implements TaskCompletionHandler {
 
     @Override
     public void onTaskComplete() {
-        String name = currentTrip.getCustomerName().contains(" ")?
-                currentTrip.getCustomerName().split(" ")[0] : currentTrip.getCustomerName();
-        String formattedDate = new SimpleDateFormat("EEE, d MMM yyyy HH:mm",
-                Locale.getDefault()).format(new Date(currentTrip.getTime()));
-
-        emailInvoice(pdfUri, currentTrip.getCustomerEmail(),"Invoice - " + formattedDate,
-                "Hi " + name +
-                        ",\n\nThis is your invoice for the " +
-                        "trip that took place on the date of " + formattedDate +
-                        ". Your total cost is $" + currentTrip.getTotalCost() +
-                        " for the services: " + TextUtils.join(", ", currentTrip.getServices()) +
-                        ". Please find the invoice attached below.\n\nThank you," +
-                        "\nPlumber Hub");
-        uploadPdf(pdfUri);
+        uploadPdfThenSendInvoice(pdfUri);
     }
 }
 

@@ -65,6 +65,9 @@
     <string-array name="trs_menu">
         <item>Edit</item>
         <item>Delete</item>
+        <item>Clear Images</item>
+        <item>Take Picture</item>
+        <item>Email Invoice</item>
     </string-array>
 
     <string-array name="cus_menu">
