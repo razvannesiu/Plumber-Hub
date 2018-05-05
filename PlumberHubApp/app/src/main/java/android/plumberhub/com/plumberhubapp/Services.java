@@ -47,6 +47,7 @@ public class Services extends AppCompatActivity {
     private RecyclerView rcvListImg;
     private FirebaseAuth firebaseAuth;
     private static boolean SLIDE_TO_RIGHT = false;
+    static DatabaseReference serviceToEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +106,10 @@ public class Services extends AppCompatActivity {
                 rcvListImg, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //...
+                Intent intent = new Intent(Services.this, DialogEditService.class);
+                intent.putExtra("service", mAdapter.getItem(position));
+                serviceToEdit = mAdapter.getRef(position);
+                startActivity(intent);
             }
 
             @Override

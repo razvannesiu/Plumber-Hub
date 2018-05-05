@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="android.plumberhub.com.plumberhubapp.DialogEditService"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/txt_edit_srv"
+        style="@style/txt_title_style"/>
+
+    <EditText
+        android:id="@+id/edtEditTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/srv_hint_title"
+        />
+
+    <EditText
+        android:id="@+id/edtEditDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/srv_hint_description"
+        />
+
+    <EditText
+        android:id="@+id/edtEditTools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/srv_hint_tools"
+        />
+
+    <EditText
+        android:id="@+id/edtEditPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/srv_hint_price"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClearEditedService"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/txt_clear"
+            style="@style/btn_non_menu_style"/>
+
+        <Button
+            android:id="@+id/btnSelectEditedImage"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/txt_select_image"
+            style="@style/btn_non_menu_style"/>
+
+        <Button
+            android:id="@+id/btnSaveEditedService"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/txt_save"
+            style="@style/btn_non_menu_style"/>
+    </LinearLayout>
+
+</LinearLayout>

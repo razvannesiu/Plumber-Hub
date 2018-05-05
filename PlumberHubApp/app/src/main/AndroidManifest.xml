@@ -55,6 +55,9 @@
         <activity
             android:name=".DialogEditTrip"
             android:theme="@style/NoTitleDialog" />
+        <activity
+            android:name=".DialogEditService"
+            android:theme="@style/NoTitleDialog"/>
     </application>
 
 </manifest>

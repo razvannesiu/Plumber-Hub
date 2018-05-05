@@ -21,7 +21,7 @@ public class DialogEditCustomer extends AppCompatActivity {
     private Animation animRotate;
     private Animation animScale;
 
-    private void editCustomer(){
+    private void saveEditedCustomer(){
         String name = edtEditName.getText().toString();
         String address = edtEditAddress.getText().toString();
         String phone = edtEditPhone.getText().toString();
@@ -67,7 +67,7 @@ public class DialogEditCustomer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animScale);
-                editCustomer();
+                saveEditedCustomer();
                 finish();
             }
         });

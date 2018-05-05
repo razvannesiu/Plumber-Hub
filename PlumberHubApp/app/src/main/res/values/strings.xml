@@ -26,6 +26,7 @@
     <string name="txt_edit_trs">Edit Trip</string>
     <string name="txt_edit_cus">Edit Customer</string>
     <string name="txt_edit_tls">Edit Tool</string>
+    <string name="txt_edit_srv">Edit Service</string>
 
     <string name="tls_hint">Enter tool name</string>
     <string name="cus_hint_name">Enter name</string>

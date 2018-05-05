@@ -14,16 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import static android.plumberhub.com.plumberhubapp.Trips.tripToEdit;
 
@@ -42,12 +36,12 @@ public class DialogEditTrip extends AppCompatActivity implements DatePickerDialo
     private int day = 0, month = 0, year = 2017, hour = 0, minute = 0,
             dayFinal = 0, monthFinal = 0, yearFinal = 2017, hourFinal = 0, minuteFinal = 0;
 
-    private void editTrip(){
+    private void saveEditedTrip(){
         String customerName = edtEditCustName.getText().toString();
         String customerEmail = edtEditCustEmail.getText().toString();
         List<String> services = new ArrayList<>();
         for (String s: edtEditServices.getText().toString().split(",")){
-            services.add(s);
+            services.add(s.trim());
         }
         double totalCost = Double.parseDouble(edtEditTotalCost.getText().toString());
         Date date = cal.getTime();
@@ -110,7 +104,7 @@ public class DialogEditTrip extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onClick(View v) {
                 v.startAnimation(animScale);
-                editTrip();
+                saveEditedTrip();
                 finish();
             }
         });

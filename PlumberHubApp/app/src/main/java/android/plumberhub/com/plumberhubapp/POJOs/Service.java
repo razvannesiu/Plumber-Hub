@@ -1,12 +1,13 @@
 package android.plumberhub.com.plumberhubapp.POJOs;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by razva on 2017-11-28.
  */
 
-public class Service {
+public class Service implements Serializable{
 
     private String title;
     private String imageUrl;

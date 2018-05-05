@@ -11,84 +11,94 @@
         android:id="@+id/main_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="@dimen/txt_menu_pad_top"
-        android:textSize="@dimen/txt_menu"
-        android:textColor="@color/colorAccent"
         android:text="@string/main_menu"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/txt_menu"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="344dp"
         android:layout_height="428dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <ImageView
+            android:id="@+id/ivPerson"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            app:srcCompat="@drawable/personaj" />
+
         <Button
             android:id="@+id/btn_est"
+            style="@style/btn_menu_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/txt_srv"
             android:tag="@string/txt_srv"
-            style="@style/btn_menu_style"/>
+            android:text="@string/txt_srv" />
 
         <Button
             android:id="@+id/btn_cus"
+            style="@style/btn_menu_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/txt_cus"
             android:tag="@string/txt_cus"
-            style="@style/btn_menu_style"/>
+            android:text="@string/txt_cus" />
 
         <Button
             android:id="@+id/btn_trs"
+            style="@style/btn_menu_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/txt_trs"
             android:tag="@string/txt_trs"
-            style="@style/btn_menu_style"/>
+            android:text="@string/txt_trs" />
 
         <Button
             android:id="@+id/btn_tls"
+            style="@style/btn_menu_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/txt_tls"
             android:tag="@string/txt_tls"
-            style="@style/btn_menu_style"/>
+            android:text="@string/txt_tls" />
 
         <Button
             android:id="@+id/btn_login"
+            style="@style/btn_menu_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/txt_login"
-            android:tag="@string/txt_login"
             android:background="@color/colorPrimary"
+            android:tag="@string/txt_login"
+            android:text="@string/txt_login"
             android:textColor="@color/colorAccent"
-            android:textStyle="bold"
-            style="@style/btn_menu_style"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_logout"
+            style="@style/btn_menu_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/txt_logout"
-            android:tag="@string/txt_logout"
             android:background="@color/colorPrimary"
+            android:tag="@string/txt_logout"
+            android:text="@string/txt_logout"
             android:textColor="@color/colorAccent"
-            android:textStyle="bold"
-            style="@style/btn_menu_style"/>
+            android:textStyle="bold" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
