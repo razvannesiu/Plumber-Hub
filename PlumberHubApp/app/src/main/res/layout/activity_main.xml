@@ -47,6 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/services"
+            android:drawableStart="@drawable/services"
             android:tag="@string/txt_srv"
             android:text="@string/txt_srv" />
 
@@ -56,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/customers"
+            android:drawableStart="@drawable/customers"
             android:tag="@string/txt_cus"
             android:text="@string/txt_cus" />
 
@@ -65,6 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/trip"
+            android:drawableStart="@drawable/trip"
             android:tag="@string/txt_trs"
             android:text="@string/txt_trs" />
 
@@ -74,6 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/tools"
+            android:drawableStart="@drawable/tools"
             android:tag="@string/txt_tls"
             android:text="@string/txt_tls" />
 
@@ -84,6 +92,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/login"
+            android:drawableStart="@drawable/login"
             android:tag="@string/txt_login"
             android:text="@string/txt_login"
             android:textColor="@color/colorAccent"
@@ -96,9 +106,12 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/log_out"
+            android:drawableStart="@drawable/log_out"
             android:tag="@string/txt_logout"
             android:text="@string/txt_logout"
             android:textColor="@color/colorAccent"
             android:textStyle="bold" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

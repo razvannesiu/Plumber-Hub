@@ -18,6 +18,8 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:layout_marginTop">@dimen/btn_menu_pad_top</item>
+        <item name="android:paddingLeft">@dimen/btn_menu_pad_left</item>
+        <item name="android:paddingRight">@dimen/btn_menu_pad_right</item>
         <item name="android:onClick">startMenuBtnHandler</item>
     </style>
 

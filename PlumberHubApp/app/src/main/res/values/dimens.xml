@@ -13,4 +13,6 @@
     <dimen name="non_menu_btn_margin">4dp</dimen>
     <dimen name="service_title">18sp</dimen>
     <dimen name="customer_name">18sp</dimen>
+    <dimen name="btn_menu_pad_left">80dp</dimen>
+    <dimen name="btn_menu_pad_right">60dp</dimen>
 </resources>
